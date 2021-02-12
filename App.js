@@ -1,8 +1,24 @@
 import React, {useState} from 'react';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
 import {Text, View} from 'react-native';
 import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
 import { enableScreens, useScreens } from 'react-native-screens';
+import ReduxThunk from 'redux-thunk';
+import Amplify from 'aws-amplify';
+import awsExports from './aws-exports';
+
+import authReducer from './store/reducers/auth';
+import BarangayNavigationContainer from './navigation/BarangayController'
+
+const rootReducer = combineReducers({
+
+        auth: authReducer
+});
+
+const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
+Amplify.configure(awsExports);
 
 
 enableScreens();
@@ -26,15 +42,8 @@ export default function App() {
     );
   }
   return (
-    <View style={{padding: 50}}>
-      <View style={{flexDirection: 'row', justifyContent:'space-between', alignItems: 'center'}}>
-        <TextInput placeholder="Username"
-        style={{ width: '80%', borderColor:'black', borderWidth:1, padding:10}} />
-
-       
-        <Button title="Login" />
-      </View>
-      
-    </View>
+    <Provider store={store}>
+      <BarangayNavigationContainer />
+    </Provider>
   );
 }

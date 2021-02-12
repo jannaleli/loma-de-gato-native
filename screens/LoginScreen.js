@@ -1,73 +1,76 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React from 'react';
 import {
-    View, 
     ScrollView,
-    Text,
+    View,
     KeyboardAvoidingView,
-    TextInput,
     StyleSheet,
-    Button,
-    Platform
+    Button
 } from 'react-native';
-import { HeaderButtons, Items } from 'react-navigation-header-buttons';
-//import actions here but we have no actions yet for login. 
-//Set this up later
+import { LinearGradient } from 'expo-linear-gradient';
+
+import Input from '../../components/UI/Input';
+import Card from '../../components/UI/Card';
+import Colors from '../../constants/Colors';
 
 
 const LoginScreen = props => {
-    const dispatch = useDispatch();
-
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-
     return (
-        <ScrollView>
-            <View style={styles.form}>
-                <Text style={styles.label}>Username</Text>
-                <TextInput
-                    style={styles.input}
-                    value={title}
-                    onChangeText={text => setUsername(text)} />
+        <KeyboardAvoidingView 
+            behavior="padding"
+            keyboardVerticalOffset={50}
+            style={styles.screen}>
+            
+            <LinearGradient colors={['#ffedff', '#ffe3ff']}
+            style={styles.gradient}>
+                <Card style={styles.authContainer}>
+                    <ScrollView>
+                    <Input 
+                    id="email"
+                    label="E-mail"
+                    keyboardType="email-address"
+                    required
+                    email
+                    autoCapitalize="none"
+                    errorMessage="Please enter a valid email address."
+                    onInputChange={() => {}}
+                    initialValue=""
+                    
+                    />
 
-            </View>
-            <View style={styles.formControl}>
-                <Text style={styles.label}>Password</Text>
-                <TextInput style={styles.input}
-                value={description}
-                onChangeText={text => setPassword(text)} / >
+                    <Input
+                    id="password"
+                    label="Password"
+                    keyboardType="default"
+                    securetextEntry
+                    required
+                    minLength={5}
+                    autoCapitalize="none"
+                    errorMessage="Please enter a alid password"
+                    onInputChange={() => }
+                    />
 
-          
+                    <View style={styles.buttonContainer}>
 
-            </View>
-        </ScrollView>
+                        <Button title="Login"
+                        color={Colors.primary}
+                        onPress={() => {}} />
+                    </View>
+                    <View style={styles.buttonContainer}>
+                        <Button 
+                            title="Switch to Sign Up"
+                            color={Colors.accent}
+                            onPress={()=>{}}
+                        
+                        />
+                    </View>
+                    </ScrollView>
+
+                </Card>
+
+
+            </LinearGradient>
+
+
+        </KeyboardAvoidingView>
     );
 };
-
-LoginScreen.navigationOptiopns = navData => {
-    const submitFn = navData.navigation.getParam('submit');
-    return {
-        headerTitle: 'Login'
-    
-    };
-};
-
-const styles = StyleSheet.create({
-    form: {
-        margin: 20
-    },
-    formControl: {
-        width: '100%'
-    },
-    label: {
-        fontFamily: 'open-sans-bold',
-        marginVertical: 8
-    },
-    input: {
-        paddingHorizontal: 2,
-        paddingVertical: 5,
-        borderBottomColor: '#ccc',
-        borderBottomWidth: 1
-    }
-});
-
-export default LoginScreen;

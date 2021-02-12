@@ -10,6 +10,9 @@ import {Ionicons} from '@expo/vector-icons';
 import {createMaterialBottomTabNavigator} from 'react-navigation-bottom-tabs';
 import Colors from '../constants/Colors';
 
+
+
+
 const defaultNavOptions = {
     headerStyle: {
         backgroundColor: Platform.OS === '.android' ? Colors.primaryColor: '' 
