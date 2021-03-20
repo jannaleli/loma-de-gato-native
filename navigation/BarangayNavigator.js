@@ -1,17 +1,18 @@
 import React from 'react';
 import {Platform, Text} from 'react-native';
 import {
-    createStackNavigator,
+  
     createBottomTabNavigator,
     createAppContainer,
-    createDrawerNavigator
+    createSwitchNavigator
 } from 'react-navigation';
 import {Ionicons} from '@expo/vector-icons';
 import {createMaterialBottomTabNavigator} from 'react-navigation-bottom-tabs';
 import Colors from '../constants/Colors';
+import LoginScreen from '../screens/LoginScreen';
+import { createDrawerNavigator } from 'react-navigation-drawer'; 
 
-
-
+import { createStackNavigator } from 'react-navigation-stack';
 
 const defaultNavOptions = {
     headerStyle: {
@@ -28,27 +29,27 @@ const defaultNavOptions = {
 };
 
 
-const LoginNavigator = createStackNavigator (
-    {
-        Login: LoginScreen
-    },
-    {
-        navigationOptions: {
-            drawerIcon: drawerConfig => (
-                <Ionicons
-                    name={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
-                    size={23}
-                    color={drawerConfig.tintColor}
-                />
-            )
-        },
-        defaultNavigationOptions: defaultNavOptions
-    }
-);
+// const LoginNavigator = createStackNavigator (
+//     {
+//         Login: LoginScreen
+//     },
+//     {
+//         navigationOptions: {
+//             drawerIcon: drawerConfig => (
+//                 <Ionicons
+//                     name={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
+//                     size={23}
+//                     color={drawerConfig.tintColor}
+//                 />
+//             )
+//         },
+//         defaultNavigationOptions: defaultNavOptions
+//     }
+// );
 
 const BarangayNavigator = createDrawerNavigator(
     {
-        Login: LoginNavigator
+        Login: LoginScreen
     },
     {
         contentOptions: {
@@ -57,4 +58,9 @@ const BarangayNavigator = createDrawerNavigator(
     }
 );
 
-export default createAppContainer(BarangayNavigator);
+const MainNavigator = createSwitchNavigator({
+    Auth: BarangayNavigator
+ 
+  });
+
+export default createAppContainer(MainNavigator);

@@ -4,13 +4,13 @@ export const GET_FAIL_USER = 'GET_FAIL_USER';
 export const GET_SUCCESS_USER = 'GET_SUCCESS_USER';
 import { Auth, actionButton } from 'aws-amplify';
 import { API } from 'aws-amplify';
-import { USER_PATH, LOMA_API_NAME } from '../../aws-configure';
+import { USER_PATH, LOMA_API_NAME } from '../../src/aws-configure';
 
 
 
 let timer;
 
-export const GET_USER = 'GET_USER';
+
 
 export const getUserFail = (error) => {
     return {

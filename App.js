@@ -1,16 +1,15 @@
 import React, {useState} from 'react';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import {Text, View} from 'react-native';
 import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
-import { enableScreens, useScreens } from 'react-native-screens';
+import { enableScreens } from 'react-native-screens';
 import ReduxThunk from 'redux-thunk';
 import Amplify from 'aws-amplify';
-import awsExports from './aws-exports';
+import awsExports from './src/aws-exports';
 
 import authReducer from './store/reducers/auth';
-import BarangayNavigationContainer from './navigation/BarangayController'
+import  BarangayNavigationContainer from './navigation/BarangayController'
 
 const rootReducer = combineReducers({
 
@@ -21,12 +20,12 @@ const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 Amplify.configure(awsExports);
 
 
-enableScreens();
+//enableScreens();
 
 const fetchFonts = () => {
   return Font.loadAsync({
     'open-sans': require('./assets/fonts/OpenSans-Regular.ttf'),
-    'open-sans-bold': require('./assets/fonts/OpenSan-Bold.ttf')
+    'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf')
   });
 };
 
@@ -41,6 +40,8 @@ export default function App() {
       />
     );
   }
+
+ 
   return (
     <Provider store={store}>
       <BarangayNavigationContainer />
