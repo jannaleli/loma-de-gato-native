@@ -13,7 +13,7 @@ const BarangayNavigationContainer = props => {
         if(!isAuth) {
             console.log('enters here');
             navRef.current.dispatch(
-                NavigationActions.navigate({ routeName: 'Auth' })
+                NavigationActions.navigate({ routeName: 'Start' })
             );
             console.log(navRef.current)
         }

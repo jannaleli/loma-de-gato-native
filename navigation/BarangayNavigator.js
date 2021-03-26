@@ -10,6 +10,7 @@ import {Ionicons} from '@expo/vector-icons';
 import {createMaterialBottomTabNavigator} from 'react-navigation-bottom-tabs';
 import Colors from '../constants/Colors';
 import LoginScreen from '../screens/LoginScreen';
+import HomeScreen from '../screens/HomeScreen';
 import { createDrawerNavigator } from 'react-navigation-drawer'; 
 
 import { createStackNavigator } from 'react-navigation-stack';
@@ -27,6 +28,8 @@ const defaultNavOptions = {
     headerTintColor: Platform.OS=== 'android' ? 'white' : Colors.primaryColor,
     
 };
+
+
 
 
 // const LoginNavigator = createStackNavigator (
@@ -47,7 +50,7 @@ const defaultNavOptions = {
 //     }
 // );
 
-const BarangayNavigator = createDrawerNavigator(
+const LoginNavigator = createDrawerNavigator(
     {
         Login: LoginScreen
     },
@@ -58,8 +61,20 @@ const BarangayNavigator = createDrawerNavigator(
     }
 );
 
+const StartNavigator = createDrawerNavigator(
+    {
+        Home: HomeScreen
+    },
+    {
+        contentOptions: {
+            activeTintColor: Colors.primary
+        }
+    }
+);
+
 const MainNavigator = createSwitchNavigator({
-    Auth: BarangayNavigator
+    Auth: LoginNavigator,
+    Start: StartNavigator
  
   });
 

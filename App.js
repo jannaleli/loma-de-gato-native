@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import * as Font from 'expo-font';
-import { AppLoading } from 'expo';
+import AppLoading from 'expo-app-loading';
 import { enableScreens } from 'react-native-screens';
 import ReduxThunk from 'redux-thunk';
 import Amplify from 'aws-amplify';
@@ -37,7 +37,8 @@ export default function App() {
       <AppLoading
       startAsync={fetchFonts}
       onFinish={() => setFontLoaded(true)}
-      />
+      onError={(err) => console.log(err)}
+  />
     );
   }
 
