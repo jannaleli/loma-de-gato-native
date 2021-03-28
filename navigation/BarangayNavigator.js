@@ -11,6 +11,7 @@ import {createMaterialBottomTabNavigator} from 'react-navigation-bottom-tabs';
 import Colors from '../constants/Colors';
 import LoginScreen from '../screens/LoginScreen';
 import HomeScreen from '../screens/HomeScreen';
+import RegisterScreen from '../screens/RegisterScreen';
 import { createDrawerNavigator } from 'react-navigation-drawer'; 
 
 import { createStackNavigator } from 'react-navigation-stack';
@@ -72,9 +73,21 @@ const StartNavigator = createDrawerNavigator(
     }
 );
 
+const RegisterNavigator = createDrawerNavigator(
+    {
+        Home: RegisterScreen
+    },
+    {
+        contentOptions: {
+            activeTintColor: Colors.primary
+        }
+    }
+);
+
 const MainNavigator = createSwitchNavigator({
     Auth: LoginNavigator,
-    Start: StartNavigator
+    Start: StartNavigator,
+    Register: RegisterNavigator
  
   });
 

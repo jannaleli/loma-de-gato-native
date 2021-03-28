@@ -145,7 +145,7 @@ const LoginScreen = props => {
 
                         <Button title="Login"
                         color={Colors.primary}
-                        onPress={inputChangeHandler} />
+                        onPress={authHandler} />
                     </View>
 
                     </ScrollView>

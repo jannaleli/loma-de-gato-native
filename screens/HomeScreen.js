@@ -57,7 +57,7 @@ const HomeScreen = props => {
                         <Button title="Register"
                         color={Colors.primary}
                         onPress={() => 
-                         props.navigation.navigate('Auth')
+                         props.navigation.navigate('Register')
                         
                        
                         } />   
@@ -65,7 +65,10 @@ const HomeScreen = props => {
                         <View style={styles.buttonContainer}>
                         <Button title="Login"
                         color={Colors.primary}
-                        /*onPress={}*/ />  
+                        onPress={ () => 
+                          props.navigation.navigate('Auth')
+                        
+                        } />  
                         </View>
                         <View style={styles.buttonContainer}>
                         <Button title="Tutorial"
