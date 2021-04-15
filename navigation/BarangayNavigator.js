@@ -15,6 +15,9 @@ import RegisterScreen from '../screens/RegisterScreen';
 import { createDrawerNavigator } from 'react-navigation-drawer'; 
 
 import { createStackNavigator } from 'react-navigation-stack';
+import BarangayClearanceScreen from '../screens/BarangayClearanceScreen';
+import BusinessPermitScreen from '../screens/BusinessPermitScreen';
+import ComplaintDetailScreen from '../screens/ComplaintDetailScreen';
 
 const defaultNavOptions = {
     headerStyle: {
@@ -84,10 +87,47 @@ const RegisterNavigator = createDrawerNavigator(
     }
 );
 
+const BarangayClearance = createDrawerNavigator(
+    {
+        Home: BarangayClearanceScreen
+    },
+    {
+        contentOptions: {
+            activeTintColor: Colors.primary
+        }
+    }
+);
+
+const BusinessPermit = createDrawerNavigator(
+    {
+        Home: BusinessPermitScreen
+    },
+    {
+        contentOptions: {
+            activeTintColor: Colors.primary
+        }
+    }
+);
+
+const ComplaintDetail = createDrawerNavigator(
+    {
+        Home: ComplaintDetailScreen
+    },
+    {
+        contentOptions: {
+            activeTintColor: Colors.primary
+        }
+    }
+);
+
 const MainNavigator = createSwitchNavigator({
     Auth: LoginNavigator,
     Start: StartNavigator,
-    Register: RegisterNavigator
+    Register: RegisterNavigator,
+    Permit: BusinessPermit,
+    Clearance: BarangayClearance,
+    Complaint: ComplaintDetail
+
  
   });
 

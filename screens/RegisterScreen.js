@@ -46,18 +46,11 @@ import {
     const [isSignup, setIsSignup] = useState(false);
     const dispatch = useDispatch();
     const authHandler = async () => {
-        let action;
-        if (isSignup) {
-          action = authActions.signup(
+        let action = authActions.signup(
             formState.inputValues.email,
             formState.inputValues.password
           );
-        } else {
-          action = authActions.login(
-            formState.inputValues.email,
-            formState.inputValues.password
-          );
-        }
+       
         setError(null);
         setIsLoading(true);
         try {
@@ -72,11 +65,39 @@ import {
       const [formState, dispatchFormState] = useReducer(formReducer, {
         inputValues: {
           email: '',
-          password: ''
+          password: '',
+          firstName: '',
+          lastName: '',
+          phone: '',
+          birthDate:'',
+          birthPlace: '',
+          gender: '',
+          civilStatus: '',
+          address: '',
+          zipNumber: '',
+          grossIncome: '',
+          tinNumber: '',
+          profession: '',
+          weight:'',
+          height:''
         },
         inputValidities: {
           email: false,
-          password: false
+          password: false,
+          firstName: false,
+          lastName: false,
+          phone: false,
+          birthDate:false,
+          birthPlace: false,
+          gender: false,
+          civilStatus: false,
+          address: false,
+          zipNumber: false,
+          grossIncome: false,
+          tinNumber: false,
+          profession: false,
+          weight:false,
+          height:false,
         },
         formIsValid: false
       });

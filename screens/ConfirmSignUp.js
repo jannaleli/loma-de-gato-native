@@ -10,14 +10,15 @@ import {
   } from 'react-native';
   import { LinearGradient } from 'expo-linear-gradient';
   import { useDispatch } from 'react-redux';
-  import * as authActions from '../store/actions/auth';
+
   
   import Input from '../components/UI/Input';
   import Card from '../components/UI/Card';
   import Colors from '../constants/Colors';
-const FORM_INPUT_UPDATE = 'FORM_INPUT_UPDATE';
 
-const formReducer = (state, action) => {
+  const FORM_INPUT_UPDATE = 'FORM_INPUT_UPDATE';
+
+  const formReducer = (state, action) => {
     if (action.type === FORM_INPUT_UPDATE) {
       const updatedValues = {
         ...state.inputValues,
@@ -39,12 +40,7 @@ const formReducer = (state, action) => {
     }
     return state;
   };
-
-
-
-
-const LoginScreen = props => {
-
+  const ConfirmSignUp = props => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
@@ -70,12 +66,10 @@ const LoginScreen = props => {
 
   const [formState, dispatchFormState] = useReducer(formReducer, {
     inputValues: {
-      email: '',
-      password: ''
+      code: ''
     },
     inputValidities: {
-      email: false,
-      password: false
+      code: false
     },
     formIsValid: false
   });
@@ -110,33 +104,20 @@ const LoginScreen = props => {
                 <Card style={styles.authContainer}>
                     <ScrollView>
                     <Input 
-                    id="email"
-                    label="E-mail"
-                    keyboardType="email-address"
+                    id="code"
+                    label="Code"
                     required
-                    email
                     autoCapitalize="none"
-                    errorMessage="Please enter a valid email address."
+                    errorMessage="Please enter a valid code."
                     onInputChange={inputChangeHandler}
                     initialValue=""
                     
                     />
 
-                    <Input
-                    id="password"
-                    label="Password"
-                    keyboardType="default"
-                    securetextEntry
-                    required
-                    minLength={5}
-                    autoCapitalize="none"
-                    errorMessage="Please enter a valid password"
-                    onInputChange={inputChangeHandler}
-                    />
 
                     <View style={styles.buttonContainer}>
 
-                        <Button title="Login"
+                        <Button title="Submit"
                         color={Colors.primary}
                         onPress={authHandler} />
                     </View>
@@ -151,24 +132,28 @@ const LoginScreen = props => {
 
         </KeyboardAvoidingView>
     );
+
 };
+
+
+
 const styles = StyleSheet.create({
-    screen: {
-      flex: 1
-    },
-    gradient: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center'
-    }, 
-    authContainer: {
-      width: '80%',
-      maxWidth: 400,
-      maxHeight: 400,
-      padding: 20
-    },
-    buttonContainer: {
-      marginTop: 10
-    }
-  });
-export default LoginScreen;
+  screen: {
+    flex: 1
+  },
+  gradient: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  authContainer: {
+    width: '80%',
+    maxWidth: 400,
+    maxHeight: 400,
+    padding: 20
+  },
+  buttonContainer: {
+    marginTop: 10
+  }
+});
+export default ConfirmSignUp;

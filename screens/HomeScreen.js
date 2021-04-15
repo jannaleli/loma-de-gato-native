@@ -9,6 +9,7 @@ import {
   Alert,
   Image
 } from 'react-native';
+
 import { LinearGradient } from 'expo-linear-gradient';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -74,7 +75,9 @@ const HomeScreen = props => {
                         <Button title="Tutorial"
                         color={Colors.primary}
                         
-                        /*onPress={}*/ />  
+                        onPress={() => 
+                          props.navigation.navigate('Permit')
+                          } />  
                         </View>  
               </ScrollView>  
        
