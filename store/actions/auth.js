@@ -1,4 +1,11 @@
 import { AsyncStorage } from 'react-native';
+import User from '../../models/User';
+
+import { Auth } from 'aws-amplify';
+import { API } from 'aws-amplify';
+import { USER_PATH, LOMA_API_NAME } from '../../src/aws-configure';
+
+
 
 export const POST_USER = 'POST_USER'; 
 export const GET_USER = 'GET_USER'; 
@@ -16,12 +23,6 @@ export const SET_SUCCESS_SIGN_UP = 'SET_SUCCESS_SIGN_UP';
 
 export const SIGN_IN_USER = 'SIGN_IN_USER'; 
 export const SIGN_IN_USER_FAIL = 'SIGN_IN_USER_FAIL';
-
-import User from '../../models/User';
-
-import { Auth } from 'aws-amplify';
-import { API } from 'aws-amplify';
-import { USER_PATH, LOMA_API_NAME } from '../../src/aws-configure';
 
 
 

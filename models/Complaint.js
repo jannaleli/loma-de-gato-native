@@ -14,4 +14,6 @@ class Complaints {
       }
 }
 
+
+
 export default Complaints;
