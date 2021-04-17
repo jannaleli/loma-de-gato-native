@@ -30,12 +30,7 @@ export const SIGN_IN_USER_FAIL = 'SIGN_IN_USER_FAIL';
 
 let timer;
 
-export const setUserFail = (error) => {
-    return {
-        type: actionTypes.SET_FAIL_USER,
-        error: error
-    };
-};
+
 
 export const loginUserSuccess = () => {
     return {
@@ -64,12 +59,7 @@ export const setUserFail = (error) => {
     };
 };
 
-export const confirmSignUp = () => {
-    return {
-        type: actionTypes.CONFIRM_SIGN_UP,
-        status: true
-    };
-};
+
 
 export const confirmSignUpSuccess = ()  => {
     return {
@@ -205,12 +195,6 @@ return dispatch => {
 
 
 
-export const getUserFail = (error) => {
-    return {
-        type: actionTypes.GET_FAIL_USER,
-        error: error
-    };
-};
 
 export const callGetUser = (username) => {
     const queryParams = USER_PATH + '/' + username

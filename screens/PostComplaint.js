@@ -10,11 +10,13 @@ import {
   } from 'react-native';
   import { LinearGradient } from 'expo-linear-gradient';
   import { useDispatch } from 'react-redux';
-
-  
+  import * as Random from 'expo-random';
+  import * as complaintActions from '../store/actions/complaint';
+  import Complaint from '../models/Complaint'
   import Input from '../components/UI/Input';
   import Card from '../components/UI/Card';
   import Colors from '../constants/Colors';
+
 const FORM_INPUT_UPDATE = 'FORM_INPUT_UPDATE';
 const formReducer = (state, action) => {
     if (action.type === FORM_INPUT_UPDATE) {
@@ -48,11 +50,34 @@ const formReducer = (state, action) => {
     const dispatch = useDispatch();
   
     const authHandler = async () => {
-      let action = authActions.login(
-          formState.inputValues.email,
-          formState.inputValues.password
+
+      let complaint_id = Random.getRandomBytes(byteCount);
+      let create_date = new Date().getDate();
+      let status = "New"
+      console.log(formState.inputValues.attachment_id)
+      console.log(formState.inputValues.complaint_desc)
+      console.log(formState.inputValues.latitude)
+      console.log(formState.inputValues.longitude)
+      console.log(formState.inputValues.status)
+      console.log(formState.inputValues.type)
+      console.log(formState.inputValues.user_id)
+
+      let complaint = new Complaint(
+        complaint_id, 
+        attachment_id, 
+        complaint_desc, 
+        create_date, 
+        latitude, 
+        longitude, 
+        status, 
+        type, 
+        user_id
+      )
+
+      let action = complaintActions.callPostComplaint(
+          complaint
         );
-      
+        /*NOTE: CHANGE THIS TO THE APPROPRIATE API CALL*/
       setError(null);
       setIsLoading(true);
       try {
@@ -66,42 +91,26 @@ const formReducer = (state, action) => {
   
     const [formState, dispatchFormState] = useReducer(formReducer, {
       inputValues: {
-        sec_number: '',
-        business_name: '',
-        business_activity: '',
-        no_of_units: '',
-        street: '',
-        building_number:'',
-        capitalization: '',
-        gross_sale: '',
-        lessor_name: '',
-        lessor_email: '',
-        lessor_building_number: '',
-        lessor_city: '',
-        lessor_subdivision: '',
-        lessor_street: '',
-        lessor_barangay: '',
-        lessor_province: '',
-        monthly_rental: ''
+        complaint_id: '',
+        attachment_id: '',
+        complaint_desc: '',
+        create_date: '',
+        latitude: '',
+        longitude: '',
+        status: '',
+        type: '',
+        user_id: '',
       },
       inputValidities: {
-        sec_number: false,
-        business_name: false,
-        business_activity: false,
-        no_of_units: false,
-        street: false,
-        building_number:false,
-        capitalization: false,
-        gross_sale: false,
-        lessor_name: false,
-        lessor_email: false,
-        lessor_building_number: false,
-        lessor_city: false,
-        lessor_subdivision: false,
-        lessor_street: false,
-        lessor_barangay: false,
-        lessor_province: false,
-        monthly_rental: false
+        complaint_id: false,
+        attachment_id: false,
+        complaint_desc: false,
+        create_date: false,
+        latitude: false,
+        longitude: false,
+        status: false,
+        type: false,
+        user_id: false
       },
       formIsValid: false
     });

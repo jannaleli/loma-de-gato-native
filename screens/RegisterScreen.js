@@ -10,7 +10,8 @@ import {
   } from 'react-native';
   import { LinearGradient } from 'expo-linear-gradient';
   import { useDispatch } from 'react-redux';
-
+  import * as authActions from '../store/actions/auth';
+  import User from '../models/User'
   
   import Input from '../components/UI/Input';
   import Card from '../components/UI/Card';
@@ -46,11 +47,59 @@ import {
     const [isSignup, setIsSignup] = useState(false);
     const dispatch = useDispatch();
     const authHandler = async () => {
+
+      let user_id = formState.inputValues.email
+      let username = formState.inputValues.email
+      let createdate = new Date().getDate
+      let attachment_id = "for editing later"
+
+      console.log(formState.inputValues.email)
+      console.log(formState.inputValues.password)
+      console.log(formState.inputValues.firstName)
+      console.log(formState.inputValues.lastName)
+      console.log(formState.inputValues.phone)
+      console.log(formState.inputValues.birthDate)
+      console.log(formState.inputValues.birthPlace)
+      console.log(formState.inputValues.gender)
+      console.log(formState.inputValues.civilStatus)
+      console.log(formState.inputValues.address)
+      console.log(formState.inputValues.zipNumber)
+      console.log(formState.inputValues.grossIncome)
+      console.log(formState.inputValues.tinNumber)
+      console.log(formState.inputValues.profession)
+      console.log(formState.inputValues.weight)
+      console.log(formState.inputValues.height)
+
+      /*NOTE: Just make sure that everything is printed out accordingly before we finish the POST process*/
+        let user = new User(
+          user_id, 
+          address, 
+          attachment_id, 
+          birthdate,
+          civil_status, 
+          contact_no, 
+          control_no, 
+          createdate, 
+          firstname,
+          gender,
+          gross_income, 
+          height, 
+          lastname, 
+          mobilenumber, 
+          password, 
+          place_of_birth, 
+          profession, 
+          tin_no, 
+          username, 
+          weight,
+          zipcode
+
+
+        )
         let action = authActions.signup(
-            formState.inputValues.email,
-            formState.inputValues.password
+          user
           );
-       
+           /*NOTE: CHANGE THIS TO THE APPROPRIATE API CALL*/
         setError(null);
         setIsLoading(true);
         try {

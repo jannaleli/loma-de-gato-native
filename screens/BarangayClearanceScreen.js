@@ -17,6 +17,7 @@ import {
   import Colors from '../constants/Colors';
 
 
+
   const FORM_INPUT_UPDATE = 'FORM_INPUT_UPDATE';
 
 const formReducer = (state, action) => {
@@ -49,10 +50,13 @@ const BarangayClearanceScreen = props => {
   const dispatch = useDispatch();
 
   const authHandler = async () => {
+    console.log(formState.inputValues.reason)
+    console.log(formState.inputValues.governmentId)
     let action = authActions.login(
         formState.inputValues.email,
         formState.inputValues.password
       );
+      /*NOTE: CHANGE THIS TO THE APPROPRIATE API CALL*/
     
     setError(null);
     setIsLoading(true);

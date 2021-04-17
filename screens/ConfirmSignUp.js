@@ -52,7 +52,7 @@ import {
         formState.inputValues.email,
         formState.inputValues.password
       );
-    
+        /*NOTE: CHANGE THIS TO THE APPROPRIATE API CALL*/
     setError(null);
     setIsLoading(true);
     try {

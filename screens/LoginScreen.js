@@ -52,11 +52,13 @@ const LoginScreen = props => {
 
   const authHandler = async () => {
         console.log("Entering authHandler")
+        console.log(formState.inputValues.email)
+        console.log(formState.inputValues.password)
     let action = authActions.signIn(
         formState.inputValues.email,
         formState.inputValues.password
       );
-    
+        /*NOTE: CHANGE THIS TO THE APPROPRIATE API CALL*/
     setError(null);
     setIsLoading(true);
     try {
@@ -126,7 +128,7 @@ const LoginScreen = props => {
                     id="password"
                     label="Password"
                     keyboardType="default"
-                    securetextEntry
+                    secureTextEntry
                     required
                     minLength={5}
                     autoCapitalize="none"

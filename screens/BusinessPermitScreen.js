@@ -10,11 +10,13 @@ import {
   } from 'react-native';
   import { LinearGradient } from 'expo-linear-gradient';
   import { useDispatch } from 'react-redux';
-
-  
+  import * as Random from 'expo-random';
+  import * as permitActions from '../store/actions/permit';
   import Input from '../components/UI/Input';
   import Card from '../components/UI/Card';
   import Colors from '../constants/Colors';
+  import Permit from '../models/Permit'
+
 const FORM_INPUT_UPDATE = 'FORM_INPUT_UPDATE';
 const formReducer = (state, action) => {
     if (action.type === FORM_INPUT_UPDATE) {
@@ -48,11 +50,57 @@ const formReducer = (state, action) => {
     const dispatch = useDispatch();
   
     const authHandler = async () => {
-      let action = authActions.login(
-          formState.inputValues.email,
-          formState.inputValues.password
+      let user_id = Random.getRandomBytes(16)
+      let username = "randomUser" /*NOTE: Change this later*/
+      let ctc_no = Random.getRandomBytes(16)
+      let status = "NEW"
+      let approval_date = "Pending"
+
+      console.log(formState.inputValues.sec_number)
+      console.log(formState.inputValues.business_name)
+      console.log(formState.inputValues.business_activity)
+      console.log(formState.inputValues.no_of_units)
+      console.log(formState.inputValues.street)
+      console.log(formState.inputValues.building_number)
+      console.log(formState.inputValues.capitalization)
+      console.log(formState.inputValues.gross_sale)
+      console.log(formState.inputValues.lessor_name)
+      console.log(formState.inputValues.lessor_email)
+      console.log(formState.inputValues.lessor_building_number)
+      console.log(formState.inputValues.lessor_city)
+      console.log(formState.inputValues.lessor_subdivision)
+      console.log(formState.inputValues.lessor_street)
+      console.log(formState.inputValues.lessor_barangay)
+      console.log(formState.inputValues.lessor_province)
+      console.log(formState.inputValues.monthly_rental)
+
+      let permit = new Permit( 
+        username, 
+        user_id, 
+        approval_date, 
+        formState.inputValues.business_activity, 
+        formState.inputValues.business_building_no, 
+        formState.inputValues.business_name, 
+        formState.inputValues.business_street, 
+        formState.inputValues.capitalization,
+        ctc_no, 
+        formState.inputValues.gross_sale,
+        formState.inputValues.lessor_barangay, 
+        formState.inputValues.lessor_bldg_no,
+        formState.inputValues.lessor_city,
+        formState.inputValues.lessor_emailaddr,
+        formState.inputValues.lessor_name,
+        formState.inputValues.lessor_province,
+        formState.inputValues.lessor_street,
+        formState.inputValues.lessor_subdv, 
+        formState.inputValues.monthly_rental,
+        formState.inputValues.sec_no,
+        status)
+
+      let action = permitActions.callPostPermit(
+        permit
         );
-      
+          /*NOTE: CHANGE THIS TO THE APPROPRIATE API CALL*/
       setError(null);
       setIsLoading(true);
       try {
