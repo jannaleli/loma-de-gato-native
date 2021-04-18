@@ -11,11 +11,12 @@ import {
   import { LinearGradient } from 'expo-linear-gradient';
   import { useDispatch } from 'react-redux';
   import * as Random from 'expo-random';
-  import * as permitActions from '../store/actions/permit';
+  //import * as permitActions from '../store/actions/permit';
   import Input from '../components/UI/Input';
   import Card from '../components/UI/Card';
   import Colors from '../constants/Colors';
-  import Permit from '../models/Permit'
+  import Permit from '../models/Permit';
+  import Dropdown from '../components/UI/Dropdown';
 
 const FORM_INPUT_UPDATE = 'FORM_INPUT_UPDATE';
 const formReducer = (state, action) => {
@@ -219,6 +220,8 @@ const formReducer = (state, action) => {
                         initialValue=""
                         
                         />
+
+
                         <Input 
                         id="business_name"
                         label="Business Name"
@@ -385,12 +388,14 @@ const formReducer = (state, action) => {
                         initialValue=""
                         
                         />
+ 
                         <View style={styles.buttonContainer}>
 
                             <Button title="Submit"
                             color={Colors.primary}
                             onPress={authHandler} />
                         </View>
+          
 
                         </ScrollView>
 

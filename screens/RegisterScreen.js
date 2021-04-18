@@ -16,7 +16,7 @@ import {
   import Input from '../components/UI/Input';
   import Card from '../components/UI/Card';
   import Colors from '../constants/Colors';
-
+  import Dropdown from '../components/UI/Dropdown';
   const FORM_INPUT_UPDATE = 'FORM_INPUT_UPDATE';
 
   const formReducer = (state, action) => {
@@ -340,17 +340,19 @@ import {
                     onInputChange={inputChangeHandler}
                     />    
    
-                   <Input
+                    <Dropdown 
                     id="gender"
                     label="Gender"
                     keyboardType="default"
-                    securetextEntry
-                    required
-                    minLength={5}
+                    initialValue={[{label: 'Female', value: 'female'},
+                                   {label: 'Male', value: 'male'}]}
+                    defaultValue={'female'}
                     autoCapitalize="none"
-                    errorMessage="Please enter a valid value"
+                    errorMessage="Please enter a valid value."
                     onInputChange={inputChangeHandler}
-                    />    
+                
+                        
+                    />  
 
                     <View style={styles.buttonContainer}>
 

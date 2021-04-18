@@ -60,6 +60,7 @@ const formReducer = (state, action) => {
       console.log(formState.inputValues.longitude)
       console.log(formState.inputValues.status)
       console.log(formState.inputValues.type)
+
       console.log(formState.inputValues.user_id)
 
       let complaint = new Complaint(
@@ -99,7 +100,7 @@ const formReducer = (state, action) => {
         longitude: '',
         status: '',
         type: '',
-        user_id: '',
+        user_id: ''
       },
       inputValidities: {
         complaint_id: false,
@@ -146,11 +147,10 @@ const formReducer = (state, action) => {
                     <Card style={styles.authContainer}>
                         <ScrollView>
                         <Input 
-                        id="sec_no"
-                        label="SEC No."
+                        id="type"
+                        label="Type"
                         keyboardType="default"
                         required
-                        email
                         autoCapitalize="none"
                         errorMessage="Please enter a valid value."
                         onInputChange={inputChangeHandler}
@@ -159,8 +159,8 @@ const formReducer = (state, action) => {
                         />
 
                         <Input
-                        id="business_building_no"
-                        label="Business Building Np."
+                        id="complaint_desc"
+                        label="Complaint Description"
                         keyboardType="default"
                         required
                         minLength={5}
@@ -169,8 +169,8 @@ const formReducer = (state, action) => {
                         onInputChange={inputChangeHandler}
                         />
                         <Input 
-                        id="business_street"
-                        label="Business Street"
+                        id="latitude"
+                        label="Latitude"
                         keyboardType="default"
                         required
                         email
@@ -181,8 +181,8 @@ const formReducer = (state, action) => {
                         
                         />
                         <Input 
-                        id="business_name"
-                        label="Business Name"
+                        id="longitude"
+                        label="Longitude"
                         keyboardType="default"
                         required
                         email
@@ -193,8 +193,8 @@ const formReducer = (state, action) => {
                         
                         />
                         <Input 
-                        id="capitalization"
-                        label="Capitalization"
+                        id="Attachment"
+                        label="Attachment"
                         keyboardType="default"
                         required
                         autoCapitalize="none"
@@ -203,149 +203,7 @@ const formReducer = (state, action) => {
                         initialValue=""
                         
                         />
-                        <Input 
-                        id="ctc_no"
-                        label="CTC No."
-                        keyboardType="default"
-                        required
-                        autoCapitalize="none"
-                        errorMessage="Please enter a valid value."
-                        onInputChange={inputChangeHandler}
-                        initialValue=""
                         
-                        />
-                        <Input 
-                        id="lessor_barangay"
-                        label="Lessor Barangay"
-                        keyboardType="default"
-                        required
-                        autoCapitalize="none"
-                        errorMessage="Please enter a valid value."
-                        onInputChange={inputChangeHandler}
-                        initialValue=""
-                        
-                        />
-                        <Input 
-                        id="lessor_bldg_no"
-                        label="Lessor Building Number"
-                        keyboardType="default"
-                        required
-                        autoCapitalize="none"
-                        errorMessage="Please enter a valid value."
-                        onInputChange={inputChangeHandler}
-                        initialValue=""
-                        
-                        />
-                        <Input 
-                        id="lessor_emailaddr"
-                        label="Lessor Email-Address"
-                        keyboardType="default"
-                        required
-                        autoCapitalize="none"
-                        errorMessage="Please enter a valid value."
-                        onInputChange={inputChangeHandler}
-                        initialValue=""
-                        
-                        />
-                        <Input 
-                        id="lessor_name"
-                        label="Lessor Name"
-                        keyboardType="default"
-                        required
-                        autoCapitalize="none"
-                        errorMessage="Please enter a valid value."
-                        onInputChange={inputChangeHandler}
-                        initialValue=""
-                        
-                        />
-                        <Input 
-                        id="lessor_province"
-                        label="Lessor Province"
-                        keyboardType="default"
-                        required
-                        autoCapitalize="none"
-                        errorMessage="Please enter a valid value."
-                        onInputChange={inputChangeHandler}
-                        initialValue=""
-                        
-                        />
-                        <Input 
-                        id="lessor_street"
-                        label="Lessor Street"
-                        keyboardType="default"
-                        required
-                        autoCapitalize="none"
-                        errorMessage="Please enter a valid value.."
-                        onInputChange={inputChangeHandler}
-                        initialValue=""
-                        
-                        />
-                        <Input 
-                        id="lessor_subdv"
-                        label="Lessor Subdivision"
-                        keyboardType="default"
-                        required
-                        autoCapitalize="none"
-                        errorMessage="Please enter a valid value.."
-                        onInputChange={inputChangeHandler}
-                        initialValue=""
-                        
-                        />
-                        <Input 
-                        id="monthly_rental"
-                        label="Monthly Rental"
-                        keyboardType="default"
-                        required
-                        autoCapitalize="none"
-                        errorMessage="Please enter a valid value."
-                        onInputChange={inputChangeHandler}
-                        initialValue=""
-                        
-                        />
-                        <Input 
-                        id="no_units"
-                        label="No. of Uinits"
-                        keyboardType="default"
-                        required
-                        autoCapitalize="none"
-                        errorMessage="Please enter a valid value.."
-                        onInputChange={inputChangeHandler}
-                        initialValue=""
-                        
-                        />
-                        <Input 
-                        id="status"
-                        label="Status"
-                        keyboardType="default"
-                        required
-                        autoCapitalize="none"
-                        errorMessage="Please enter a valid value."
-                        onInputChange={inputChangeHandler}
-                        initialValue=""
-                        
-                        />
-                        <Input 
-                        id="gross_sale"
-                        label="Gross Sale"
-                        keyboardType="default"
-                        required
-                        autoCapitalize="none"
-                        errorMessage="Please enter a valid value."
-                        onInputChange={inputChangeHandler}
-                        initialValue=""
-                        
-                        />
-                        <Input 
-                        id="email"
-                        label="E-mail"
-                        keyboardType="default"
-                        required
-                        autoCapitalize="none"
-                        errorMessage="Please enter a valid value.."
-                        onInputChange={inputChangeHandler}
-                        initialValue=""
-                        
-                        />
                         <View style={styles.buttonContainer}>
 
                             <Button title="Submit"
