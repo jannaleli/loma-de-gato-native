@@ -10,7 +10,7 @@ import {
   } from 'react-native';
   import { LinearGradient } from 'expo-linear-gradient';
   import { useDispatch } from 'react-redux';
-
+  import Dropdown from '../components/UI/Dropdown';
   
   import Input from '../components/UI/Input';
   import Card from '../components/UI/Card';
@@ -86,6 +86,18 @@ const BarangayClearanceScreen = props => {
       Alert.alert('An Error Occurred!', error, [{ text: 'Okay' }]);
     }
   }, [error]);
+  const inputChangeHandler = useCallback(
+    (inputIdentifier, inputValue, inputValidity) => {
+        dispatchFormState(
+            {
+                type: FORM_INPUT_UPDATE,
+                value: inputValue,
+                isValid: inputValidity,
+                input: inputIdentifier
+            }
+        );
+    }, [dispatchFormState]
+);
 
   return (
     <KeyboardAvoidingView 
@@ -109,16 +121,19 @@ const BarangayClearanceScreen = props => {
                 
                 />
 
-                <Input
-                id="reason"
-                label="Reason"
-                keyboardType="default"
-                required
-                autoCapitalize="none"
-                errorMessage="Please enter a valid Reason
-                "
-                onInputChange={inputChangeHandler}
-                />
+                    <Dropdown 
+                    id="reason"
+                    label="Reason"
+                    keyboardType="default"
+                    initialValue={[{label: 'Employment', value: 'employment'},
+                                   {label: 'Personal', value: 'personal'}]}
+                    defaultValue={'employment'}
+                    autoCapitalize="none"
+                    errorMessage="Please enter a valid value."
+                    onInputChange={inputChangeHandler}
+                
+                        
+                    />  
 
                 <View style={styles.buttonContainer}>
 

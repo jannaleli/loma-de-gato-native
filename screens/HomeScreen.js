@@ -76,7 +76,7 @@ const HomeScreen = props => {
                         color={Colors.primary}
                         
                         onPress={() => 
-                          props.navigation.navigate('Permit')
+                          props.navigation.navigate('Clearance')
                           } />  
                         </View>  
               </ScrollView>  

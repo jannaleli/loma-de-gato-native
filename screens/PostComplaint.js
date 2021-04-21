@@ -16,7 +16,7 @@ import {
   import Input from '../components/UI/Input';
   import Card from '../components/UI/Card';
   import Colors from '../constants/Colors';
-
+  
 const FORM_INPUT_UPDATE = 'FORM_INPUT_UPDATE';
 const formReducer = (state, action) => {
     if (action.type === FORM_INPUT_UPDATE) {
