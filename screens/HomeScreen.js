@@ -67,7 +67,7 @@ const HomeScreen = props => {
                         <Button title="Login"
                         color={Colors.primary}
                         onPress={ () => 
-                          props.navigation.navigate('Auth')
+                          props.navigation.navigate('Login')
                         
                         } />  
                         </View>

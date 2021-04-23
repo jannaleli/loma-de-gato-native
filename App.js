@@ -7,9 +7,26 @@ import { enableScreens } from 'react-native-screens';
 import ReduxThunk from 'redux-thunk';
 import Amplify from 'aws-amplify';
 import awsExports from './src/aws-exports';
-
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import authReducer from './store/reducers/auth';
 import  BarangayNavigationContainer from './navigation/BarangayController'
+import BarangayClearanceScreen from './screens/BarangayClearanceScreen';
+import BusinessPermitScreen from './screens/BusinessPermitScreen';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+
+import {Ionicons} from '@expo/vector-icons';
+import Colors from './constants/Colors';
+import LoginScreen from './screens/LoginScreen';
+import HomeScreen from './screens/HomeScreen';
+import RegisterScreen from './screens/RegisterScreen';
+import { createDrawerNavigator } from 'react-navigation-drawer'; 
+
+
+
+
+import ComplaintDetailScreen from './screens/ComplaintDetailScreen';
 
 const rootReducer = combineReducers({
 
@@ -45,7 +62,10 @@ export default function App() {
  
   return (
     <Provider store={store}>
-      <BarangayNavigationContainer />
+      
+        <BarangayNavigationContainer /> 
+
+  
     </Provider>
   );
 }
