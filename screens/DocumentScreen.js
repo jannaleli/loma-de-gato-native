@@ -31,7 +31,7 @@ const DocumentScreen = props => {
                             color={Colors.primary}
                             onPress={
                                 () => 
-                                props.navigation.navigate('Apply Permit')
+                                props.navigation.navigate('Apply Clearance')
                             }/>
                         </View>
                         <View style={styles.buttonContainer}>

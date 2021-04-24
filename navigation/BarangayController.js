@@ -23,11 +23,36 @@ import ComplaintDetailScreen from '../screens/ComplaintDetailScreen';
 
     function MyAuthStack() {
         return (
-            <AuthStack.Navigator>
+            <AuthStack.Navigator
+            screenOptions={{
+                headerStyle: {
+                  backgroundColor: '#f4511e',
+                },
+                headerTintColor: '#fff',
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                },
+              }}>
     
-                    <AuthStack.Screen name="Home" component={HomeScreen} />
-                    <AuthStack.Screen name="Login" component={LoginScreen} />
-                    <AuthStack.Screen name="Register" component={RegisterScreen} />
+                    <AuthStack.Screen 
+                    name="Home" 
+                    component={HomeScreen}
+                    options={{
+                        headerShown: false  
+                    }}
+                        />
+                    <AuthStack.Screen 
+                    name="Login" 
+                    component={LoginScreen} 
+                    options={{
+                        title: 'Login'  
+                    }}/>
+                    <AuthStack.Screen 
+                    name="Register" 
+                    component={RegisterScreen} 
+                    options={{
+                        title: 'Register'  
+                    }}/>
             </AuthStack.Navigator>
         );
     }
@@ -36,10 +61,35 @@ import ComplaintDetailScreen from '../screens/ComplaintDetailScreen';
 
     function MyDocumentStack() {
         return (
-            <DocumentStack.Navigator>
-                    <DocumentStack.Screen name="Documents" component={DocumentScreen} />
-                    <DocumentStack.Screen name="Apply Clearance" component={BarangayClearanceScreen} />
-                    <DocumentStack.Screen name="Apply Permit" component={BusinessPermitScreen} />
+            <DocumentStack.Navigator
+            screenOptions={{
+                headerStyle: {
+                  backgroundColor: '#f4511e',
+                },
+                headerTintColor: '#fff',
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                },
+              }}>
+                    <DocumentStack.Screen 
+                    name="Documents" 
+                    component={DocumentScreen}
+                    
+                    options={{
+                        headerShown: false  
+                    }}
+                     />
+                    <DocumentStack.Screen name="Apply Clearance" 
+                    component={BarangayClearanceScreen}
+                    options={{
+                        title: 'Clearance'  
+                    }}
+                    />
+                    <DocumentStack.Screen name="Apply Permit" 
+                    component={BusinessPermitScreen} 
+                    options={{
+                        title: 'Permit'  
+                    }}/>
                     <DocumentStack.Screen name="Check Status" component={RegisterScreen} />
             </DocumentStack.Navigator>
         );
@@ -60,7 +110,7 @@ import ComplaintDetailScreen from '../screens/ComplaintDetailScreen';
 
 const BarangayNavigationContainer = props => {
     const navRef = useRef();
-    const isAuth = true;//useSelector(state => !!state.auth.token)
+    const isAuth = false;//useSelector(state => !!state.auth.token)
 //    const isAuth = useSelector(state => !!state.auth.access_token);
     // useEffect( () => {
       
