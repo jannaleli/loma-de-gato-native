@@ -2,7 +2,10 @@ import Complaints from '../../models/Complaint';
 import { COMPLAINT_PATH, LOMA_API_NAME } from '../../aws-configure';
 import { API } from 'aws-amplify';
 
-
+import S3 from 'aws-sdk/clients/s3';
+import { Credentials } from 'aws-sdk';
+import { v4 as uuid } from 'uuid';
+ 
 
 export const POST_COMPLAINT = 'POST_COMPLAINT';     
 export const GET_COMPLAINTS = 'GET_COMPLAINTS'; 
@@ -138,4 +141,18 @@ export const callGetComplaint = () => {
        });
     };
 
+};
+
+export const  uploadImage = (image) => {
+//This is where we upload the image to AWS
+const access = new Credentials({
+    accessKeyId: process.env.AWS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET,
+  });
+  
+  const s3 = new S3({
+    credentials: access,
+    region: process.env.S3_REGION, //"us-west-2"
+    signatureVersion: "v4",
+  });
 };

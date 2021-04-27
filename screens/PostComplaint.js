@@ -48,6 +48,8 @@ const formReducer = (state, action) => {
     const [error, setError] = useState();
     const [isSignup, setIsSignup] = useState(false);
     const dispatch = useDispatch();
+
+    
   
     const authHandler = async () => {
 
@@ -192,6 +194,15 @@ const formReducer = (state, action) => {
                         initialValue=""
                         
                         />
+                        <View style={styles.buttonContainer}>
+                        <Button title="Get Latitude/Longitude"
+                        color={Colors.primary}
+                        onPress={
+                          () => 
+                          props.navigation.navigate('Auth')
+                        } />
+                        </View>
+                  
                         <Input 
                         id="Attachment"
                         label="Attachment"
