@@ -15,7 +15,7 @@ import BusinessPermitScreen from './screens/BusinessPermitScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import { ThemeProvider } from '@material-ui/core/styles';
+
 import { Ionicons } from '@expo/vector-icons';
 import Colors from './constants/Colors';
 import LoginScreen from './screens/LoginScreen';
@@ -36,16 +36,7 @@ const rootReducer = combineReducers({
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 Amplify.configure(awsExports);
 
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: '#a8baab',
-    },
-    secondary: {
-      main: '#153b35',
-    },
-  },
-});
+
 //enableScreens();
 
 const fetchFonts = () => {
@@ -71,9 +62,9 @@ export default function App() {
 
   return (
     <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        <BarangayNavigationContainer />
-      </ThemeProvider>
+
+      <BarangayNavigationContainer />
+
 
     </Provider>
   );

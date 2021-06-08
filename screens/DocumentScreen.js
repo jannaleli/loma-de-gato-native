@@ -4,7 +4,9 @@ import {
     View,
     KeyboardAvoidingView,
     StyleSheet,
-    Button
+    Button,
+    TouchableOpacity,
+    Text
 } from 'react-native';
 
 import { LinearGradient } from 'expo-linear-gradient';
@@ -19,44 +21,48 @@ const DocumentScreen = props => {
             keyboardVerticalOffset={50}
             style={styles.screen}>
 
-            <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']}
+            <LinearGradient colors={['#a8baab', '#ebedd0', '#fdfefd']}
                 style={styles.gradient}>
 
                 <Card style={styles.homeContainer}>
 
                     <ScrollView>
                         <View style={styles.buttonContainer}>
+                            <TouchableOpacity onPress={
+                                () =>
+                                    props.navigation.navigate('Apply Clearance')
+                            } style={styles.appButtonContainer}>
+                                <Text style={styles.appButtonText}>Apply Clearance</Text>
+                            </TouchableOpacity>
 
-                            <Button title="Apply Clearance"
-                                color={Colors.primary}
-                                onPress={
-                                    () =>
-                                        props.navigation.navigate('Apply Clearance')
-                                } />
+
                         </View>
                         <View style={styles.buttonContainer}>
-                            <Button title="Apply Permit"
-                                color={Colors.primary}
-                                onPress={
-                                    () =>
-                                        props.navigation.navigate('Apply Permit')
-                                } />
+                            <TouchableOpacity onPress={
+                                () =>
+                                    props.navigation.navigate('Apply Permit')
+                            } style={styles.appButtonContainer}>
+                                <Text style={styles.appButtonText}>Apply Permit</Text>
+                            </TouchableOpacity>
+
                         </View>
                         <View style={styles.buttonContainer}>
-                            <Button title="Check Status"
-                                color={Colors.primary}
-                                onPress={
-                                    () =>
-                                        props.navigation.navigate('Auth')
-                                } />
+
+                            <TouchableOpacity onPress={
+                                () =>
+                                    props.navigation.navigate('Auth')
+                            } style={styles.appButtonContainer}>
+                                <Text style={styles.appButtonText}>Check Status</Text>
+                            </TouchableOpacity>
                         </View>
                         <View style={styles.buttonContainer}>
-                            <Button title="Post Complaint temp"
-                                color={Colors.primary}
-                                onPress={
-                                    () =>
-                                        props.navigation.navigate('Complaint', { pickedLocation: { lat: 14.7731, lng: 121.0183 } })
-                                } />
+                            <TouchableOpacity onPress={
+                                () =>
+                                    props.navigation.navigate('Complaint', { pickedLocation: { lat: 14.7731, lng: 121.0183 } })
+                            } style={styles.appButtonContainer}>
+                                <Text style={styles.appButtonText}>Post Complaint temp</Text>
+                            </TouchableOpacity>
+
                         </View>
                     </ScrollView>
                 </Card>
@@ -88,6 +94,19 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         marginTop: 10
+    },
+    appButtonContainer: {
+        elevation: 8,
+        backgroundColor: Colors.primary,
+        borderRadius: 10,
+        paddingVertical: 10,
+        paddingHorizontal: 12
+    },
+    appButtonText: {
+        fontSize: 15,
+        color: "#fff",
+        alignSelf: "center",
+        textTransform: "uppercase"
     }
 });
 export default DocumentScreen;

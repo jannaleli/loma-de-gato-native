@@ -173,80 +173,79 @@ const ComplaintDetailScreen = props => {
       keyboardVerticalOffset={50}
       style={styles.screen}>
 
-      <LinearGradient colors={['#ffedff', '#ffe3ff']}
-        style={styles.gradient}>
-        <Card style={styles.authContainer}>
-          <ScrollView>
-            <View style={styles.imagePicker}>
-              <View style={styles.imagePreview}>
-                {!pickedImage ? (
-                  <Text>No image picked yet.</Text>
-                ) : (
-                    <Image style={styles.image} source={{ uri: pickedImage }} />
-                  )}
-              </View>
-              <Button
-                title="Take Image"
-                color={Colors.primary}
-                onPress={takeImageHandler}
-              />
-            </View>
-            <Input
-              id="complaint_desc"
-              label="Complaint Description"
-              initialValue="hello"
-              keyboardType="default"
-              required
-              email
-              autoCapitalize="none"
-              errorMessage="Please enter a valid value."
-              onInputChange={inputChangeHandler}
 
 
-            />
+      <ScrollView>
+        <View style={styles.imagePicker}>
+          <View style={styles.imagePreview}>
+            {!pickedImage ? (
+              <Text>No image picked yet.</Text>
+            ) : (
+                <Image style={styles.image} source={{ uri: pickedImage }} />
+              )}
+          </View>
+          <Button
+            title="Take Image"
+            color={Colors.primary}
+            onPress={takeImageHandler}
+          />
+        </View>
+        <Input
+          id="complaint_desc"
+          label="Complaint Description"
+          initialValue="hello"
+          keyboardType="default"
+          required
+          email
+          autoCapitalize="none"
+          errorMessage="Please enter a valid value."
+          onInputChange={inputChangeHandler}
 
 
-            <Text h1>{latitude ? '' + latitude : "Get Location first"}</Text>
-            <Text h1>{longitude ? '' + longitude : "Get Location first"}</Text>
+        />
 
 
-            <View style={styles.buttonContainer}>
-              <Button title="Get Longitude/Latitude"
-                color={Colors.primary}
-                onPress={
-                  () =>
-                    props.navigation.navigate('Map', { initialLocation: pickedLocation, onLocationHandler: locationPickedHandler })
-
-                  //   props.navigation.navigate('Location', { onLocationPicked: locationPickedHandler, pickedLocation: pickedLocation })
-                }
-              />
-            </View>
-            <Input
-              id="type"
-              label="Complaint Type"
-              keyboardType="default"
-              required
-              email
-              autoCapitalize="none"
-              errorMessage="Please enter a valid value."
-              onInputChange={inputChangeHandler}
-              initialValue=""
-
-            />
-
-            <View style={styles.buttonContainer}>
-
-              <Button title="Login"
-                color={Colors.primary}
-                onPress={authHandler} />
-            </View>
-
-          </ScrollView>
-
-        </Card>
+        <Text h1>{latitude ? '' + latitude : "Get Location first"}</Text>
+        <Text h1>{longitude ? '' + longitude : "Get Location first"}</Text>
 
 
-      </LinearGradient>
+        <View style={styles.buttonContainer}>
+          <Button title="Get Longitude/Latitude"
+            color={Colors.primary}
+            onPress={
+              () =>
+                props.navigation.navigate('Map', { initialLocation: pickedLocation, onLocationHandler: locationPickedHandler })
+
+              //   props.navigation.navigate('Location', { onLocationPicked: locationPickedHandler, pickedLocation: pickedLocation })
+            }
+          />
+        </View>
+        <Input
+          id="type"
+          label="Complaint Type"
+          keyboardType="default"
+          required
+          email
+          autoCapitalize="none"
+          errorMessage="Please enter a valid value."
+          onInputChange={inputChangeHandler}
+          initialValue=""
+
+        />
+
+        <View style={styles.buttonContainer}>
+
+          <Button title="Login"
+            color={Colors.primary}
+            onPress={authHandler} />
+        </View>
+
+      </ScrollView>
+
+
+
+
+
 
 
     </KeyboardAvoidingView>

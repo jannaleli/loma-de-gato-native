@@ -39,7 +39,7 @@ function MyAuthStack() {
         <AuthStack.Navigator
             screenOptions={{
                 headerStyle: {
-                    backgroundColor: '#f4511e',
+                    backgroundColor: Colors.primary,
                 },
                 headerTintColor: '#fff',
                 headerTitleStyle: {
@@ -77,7 +77,7 @@ function MyDocumentStack() {
         <DocumentStack.Navigator
             screenOptions={{
                 headerStyle: {
-                    backgroundColor: '#f4511e',
+                    backgroundColor: Colors.primary,
                 },
                 headerTintColor: '#fff',
                 headerTitleStyle: {
