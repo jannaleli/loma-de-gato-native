@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {
     View,
-    Button, 
+    Button,
     Text,
     ActivityIndicator,
     Alert,
@@ -10,18 +10,23 @@ import {
 import * as Location from 'expo-location';
 import * as Permission from 'expo-permissions';
 
-import Colors from '../constants/Colors';
+import Colors from '../../constants/Colors';
+
 
 const LocationPicker = props => {
-    const [isFetching, setIsFetching] = useState(false);
-    const [pickedLocation, setPickedLocation]  = useState();
 
-    const mapPickedLocation = props.navigation.getParam('pickedLocation');
+    const [pickedLocation, setPickedLocation] = useState();
 
-    const { onLocationPicked } = props;
 
-    useEffect( () => {
-        if(mapPickedLocation){
+
+    const mapPickedLocation = props.route.params.pickedLocation;//('pickedLocation');
+
+    const { onLocationPicked } = props.route.params;
+
+    useEffect(() => {
+        console.log(mapPickedLocation)
+        console.log(onLocationPicked);
+        if (mapPickedLocation) {
             setPickedLocation(mapPickedLocation);
             onLocationPicked(mapPickedLocation);
 
@@ -30,54 +35,22 @@ const LocationPicker = props => {
 
     );
 
-    const verifyPermissions = async() => {
-        const result = await Permissions.askAsync(Permissions.LOCATION);
-        if(result.status !== 'granted') {
-            //Alert here
-            return false;
 
-        };
-        return true;
-    };
 
-    const getLocationHandler = async () => {
-        const hasPermission = await verifyPermissions();
-        if(!hasPermission) {
-            return;
-        }
-
-        try {
-            setIsFetching(true);
-            const location = await Location.getCurrentPositionAsync(
-              { timeout: 5000 }  
-            );
-
-            setPickedLocation({
-                lat: location.coords.latitude,
-                lng: location.coords.longitude
-            });
-            props.onLocationPicked({
-                lat: location.coords.latitude,
-                lng: location.coords.longitude
-            });
-        }catch (err){
-            //Alert
-        }
-        setIsFetching(false);
-    };
 
     const pickOnMapHandler = () => {
-        props.navigation.navigate('Map');
+        props.navigation.navigate('Map', { initialLocation: { mapPickedLocation } });
     }
 
     return (
         <View style={StyleSheet.LocationPicker} >
 
             <View style={styles.actions}>
-                <Button 
+                <Button
                     title="Pick on Map"
                     color={Colors.primary}
                     onPress={pickOnMapHandler}
+
                 />
 
             </View>

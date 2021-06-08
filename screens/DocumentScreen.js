@@ -15,12 +15,12 @@ import Card from '../components/UI/Card';
 const DocumentScreen = props => {
     return (
         <KeyboardAvoidingView
-        behavior="padding"
-        keyboardVerticalOffset={50}
-        style={styles.screen}>
+            behavior="padding"
+            keyboardVerticalOffset={50}
+            style={styles.screen}>
 
             <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']}
-            style={styles.gradient}>
+                style={styles.gradient}>
 
                 <Card style={styles.homeContainer}>
 
@@ -28,27 +28,35 @@ const DocumentScreen = props => {
                         <View style={styles.buttonContainer}>
 
                             <Button title="Apply Clearance"
-                            color={Colors.primary}
-                            onPress={
-                                () => 
-                                props.navigation.navigate('Apply Clearance')
-                            }/>
+                                color={Colors.primary}
+                                onPress={
+                                    () =>
+                                        props.navigation.navigate('Apply Clearance')
+                                } />
                         </View>
                         <View style={styles.buttonContainer}>
-                        <Button title="Apply Permit"
-                        color={Colors.primary}
-                        onPress={
-                            () => 
-                            props.navigation.navigate('Apply Permit')
-                        }/>
+                            <Button title="Apply Permit"
+                                color={Colors.primary}
+                                onPress={
+                                    () =>
+                                        props.navigation.navigate('Apply Permit')
+                                } />
                         </View>
                         <View style={styles.buttonContainer}>
-                        <Button title="Check Status"
-                        color={Colors.primary}
-                        onPress={
-                            () => 
-                            props.navigation.navigate('Auth')
-                        }/>
+                            <Button title="Check Status"
+                                color={Colors.primary}
+                                onPress={
+                                    () =>
+                                        props.navigation.navigate('Auth')
+                                } />
+                        </View>
+                        <View style={styles.buttonContainer}>
+                            <Button title="Post Complaint temp"
+                                color={Colors.primary}
+                                onPress={
+                                    () =>
+                                        props.navigation.navigate('Complaint', { pickedLocation: { lat: 14.7731, lng: 121.0183 } })
+                                } />
                         </View>
                     </ScrollView>
                 </Card>

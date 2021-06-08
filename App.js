@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import * as Font from 'expo-font';
@@ -9,19 +9,19 @@ import Amplify from 'aws-amplify';
 import awsExports from './src/aws-exports';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import authReducer from './store/reducers/auth';
-import  BarangayNavigationContainer from './navigation/BarangayController'
+import BarangayNavigationContainer from './navigation/BarangayController'
 import BarangayClearanceScreen from './screens/BarangayClearanceScreen';
 import BusinessPermitScreen from './screens/BusinessPermitScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-
-import {Ionicons} from '@expo/vector-icons';
+import { ThemeProvider } from '@material-ui/core/styles';
+import { Ionicons } from '@expo/vector-icons';
 import Colors from './constants/Colors';
 import LoginScreen from './screens/LoginScreen';
 import HomeScreen from './screens/HomeScreen';
 import RegisterScreen from './screens/RegisterScreen';
-import { createDrawerNavigator } from 'react-navigation-drawer'; 
+import { createDrawerNavigator } from 'react-navigation-drawer';
 
 
 
@@ -30,13 +30,22 @@ import ComplaintDetailScreen from './screens/ComplaintDetailScreen';
 
 const rootReducer = combineReducers({
 
-        auth: authReducer
+  auth: authReducer
 });
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 Amplify.configure(awsExports);
 
-
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#a8baab',
+    },
+    secondary: {
+      main: '#153b35',
+    },
+  },
+});
 //enableScreens();
 
 const fetchFonts = () => {
@@ -49,23 +58,23 @@ const fetchFonts = () => {
 export default function App() {
   const [fontLoaded, setFontLoaded] = useState(false);
 
-  if(!fontLoaded){
+  if (!fontLoaded) {
     return (
       <AppLoading
-      startAsync={fetchFonts}
-      onFinish={() => setFontLoaded(true)}
-      onError={(err) => console.log(err)}
-  />
+        startAsync={fetchFonts}
+        onFinish={() => setFontLoaded(true)}
+        onError={(err) => console.log(err)}
+      />
     );
   }
 
- 
+
   return (
     <Provider store={store}>
-      
-        <BarangayNavigationContainer /> 
+      <ThemeProvider theme={theme}>
+        <BarangayNavigationContainer />
+      </ThemeProvider>
 
-  
     </Provider>
   );
 }

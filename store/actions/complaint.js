@@ -5,10 +5,10 @@ import { API } from 'aws-amplify';
 import S3 from 'aws-sdk/clients/s3';
 import { Credentials } from 'aws-sdk';
 import { v4 as uuid } from 'uuid';
- 
 
-export const POST_COMPLAINT = 'POST_COMPLAINT';     
-export const GET_COMPLAINTS = 'GET_COMPLAINTS'; 
+
+export const POST_COMPLAINT = 'POST_COMPLAINT';
+export const GET_COMPLAINTS = 'GET_COMPLAINTS';
 export const SET_COMPLAINT_FAIL = 'SET_COMPLAINT_FAIL';
 export const GET_COMPLAINT_FAIL = 'GET_COMPLAINT_FAIL';
 export const SET_COMPLAINT_SUCCESS = 'SET_COMPLAINT_SUCCESS';
@@ -29,19 +29,19 @@ export const postComplaint = (
     status,
     type,
     user_id) => {
-        return {
-            type: actionTypes.POST_COMPLAINT,
-            complaint_id:complaint_id,
-            attachment_id:attachment_id,
-            complaint_desc:complaint_desc,
-            create_date:create_date,
-            latitude:latitude,
-            longitude:longitude,
-            status:status,
-            type:type,
-            user_id:user_id
+    return {
+        type: actionTypes.POST_COMPLAINT,
+        complaint_id: complaint_id,
+        attachment_id: attachment_id,
+        complaint_desc: complaint_desc,
+        create_date: create_date,
+        latitude: latitude,
+        longitude: longitude,
+        status: status,
+        type: type,
+        user_id: user_id
 
-        };
+    };
 
 };
 
@@ -65,7 +65,7 @@ export const postComplaintSuccess = (error) => {
     };
 };
 
-export const callPostComplaint = ( complaint_id,
+export const callPostComplaint = (complaint_id,
     attachment_id,
     complaint_desc,
     create_date,
@@ -75,10 +75,10 @@ export const callPostComplaint = ( complaint_id,
     type,
     user_id) => {
 
-   
+
 
     const params = {
-        body : {
+        body: {
             'complaint_id': complaint_id,
             'attachment_id': '4',
             'complaint_desc': complaint_desc,
@@ -89,7 +89,7 @@ export const callPostComplaint = ( complaint_id,
             'status': 'NEW',
             'create_date': create_date
         },
-        headers : {
+        headers: {
             'Content-Type': 'application/json',
             'Accept': '*/*',
             'Host': 'mjdjlvb5x9.execute-api.ap-southeast-1.amazonaws.com',
@@ -100,23 +100,23 @@ export const callPostComplaint = ( complaint_id,
     };
     return dispatch => {
         API
-        .post(LOMA_API_NAME, COMPLAINT_PATH, params)
-        .then(response => {
-          // Add your code here
-          //add success!!!!
-        })
-        .catch(error => {
-          console.log(error.response);
-          dispatch(postComplaintFail(error.response));
-        });
+            .post(LOMA_API_NAME, COMPLAINT_PATH, params)
+            .then(response => {
+                // Add your code here
+                //add success!!!!
+            })
+            .catch(error => {
+                console.log(error.response);
+                dispatch(postComplaintFail(error.response));
+            });
     };
 };
 
 export const callGetComplaint = () => {
-           
+
 
     const params = {
-        headers : {
+        headers: {
             'Content-Type': 'application/json',
             'Accept': '*/*',
             'Host': 'mjdjlvb5x9.execute-api.ap-southeast-1.amazonaws.com',
@@ -128,31 +128,42 @@ export const callGetComplaint = () => {
     };
     return dispatch => {
         API
-        .get(LOMA_API_NAME, COMPLAINT_PATH, params)
-        .then(response => {
-          // Add your code here
-          console.log('Getting Complaint Success')
-          console.log(response)
-          dispatch(getComplaints(response));
-        })
-        .catch(error => {
-          console.log(error);
-          dispatch(getComplaintFail(error));
-       });
+            .get(LOMA_API_NAME, COMPLAINT_PATH, params)
+            .then(response => {
+                // Add your code here
+                console.log('Getting Complaint Success')
+                console.log(response)
+                dispatch(getComplaints(response));
+            })
+            .catch(error => {
+                console.log(error);
+                dispatch(getComplaintFail(error));
+            });
     };
 
 };
 
-export const  uploadImage = (image) => {
-//This is where we upload the image to AWS
-const access = new Credentials({
-    accessKeyId: process.env.AWS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET,
-  });
-  
-  const s3 = new S3({
-    credentials: access,
-    region: process.env.S3_REGION, //"us-west-2"
-    signatureVersion: "v4",
-  });
+export const uploadImage = (fileId) => {
+    //This is where we upload the image to AWS
+    const access = new Credentials({
+        accessKeyId: "AKIAV3DMSFPHRCBIOO6D",
+        secretAccessKey: "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",
+    });
+
+    const s3 = new S3({
+        credentials: access,
+        region: "ap-southeast-1", //"us-west-2"
+        signatureVersion: "v4",
+    });
+    const fileId = uuid();
+    const signedUrlExpireSeconds = 60 * 15;
+
+    const url = await s3.getSignedUrlPromise("putObject", {
+        Bucket: "barangay-api",
+        Key: `${fileId}.jpg`,
+        ContentType: "image/jpeg",
+        Expires: signedUrlExpireSeconds,
+    });
+
+    //What do we do with this URL
 };
