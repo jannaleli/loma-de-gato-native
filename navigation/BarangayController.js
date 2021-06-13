@@ -2,8 +2,8 @@ import React, { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
 
-
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
@@ -131,14 +131,12 @@ function MyTabs() {
         <Tab.Navigator>
             <Tab.Screen name="Event" component={MyAuthStack} />
             <Tab.Screen name="Documents" component={MyDocumentStack} />
-            <Tab.Screen name="Complaint" component={ComplaintDetailScreen} />
-            <Tab.Screen name="Contact" component={BusinessPermitScreen} />
         </Tab.Navigator>
     );
 }
 
 const BarangayNavigationContainer = props => {
-    const navRef = useRef();
+    //const navRef = useRef();
     const isAuth = true;//useSelector(state => !!state.auth.token)
     //    const isAuth = useSelector(state => !!state.auth.access_token);
     // useEffect( () => {
@@ -159,7 +157,7 @@ const BarangayNavigationContainer = props => {
     return (
 
         <NavigationContainer>
-            {isAuth && <MyDocumentStack />}
+            {isAuth && <MyTabs />}
             {!isAuth && <MyAuthStack />}
         </NavigationContainer>
 

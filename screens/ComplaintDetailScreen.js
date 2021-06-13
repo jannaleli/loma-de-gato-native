@@ -4,12 +4,15 @@ import {
   View,
   KeyboardAvoidingView,
   StyleSheet,
-  Button,
   Image,
   ActivityIndicator,
   Alert,
-  Text
+  Text,
+  TouchableOpacity
+
 } from 'react-native';
+
+import { Button } from 'react-native-paper';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useDispatch } from 'react-redux';
 import * as ImagePicker from 'expo-image-picker';
@@ -18,6 +21,8 @@ import * as Permissions from 'expo-permissions';
 import Input from '../components/UI/Input';
 import Card from '../components/UI/Card';
 import Colors from '../constants/Colors';
+import MapPreview from '../components/MapPreview';
+
 
 const FORM_INPUT_UPDATE = 'FORM_INPUT_UPDATE';
 const formReducer = (state, action) => {
@@ -174,75 +179,94 @@ const ComplaintDetailScreen = props => {
       style={styles.screen}>
 
 
+      <View style={styles.authContainer}>
+        <ScrollView>
 
-      <ScrollView>
-        <View style={styles.imagePicker}>
-          <View style={styles.imagePreview}>
-            {!pickedImage ? (
-              <Text>No image picked yet.</Text>
-            ) : (
-                <Image style={styles.image} source={{ uri: pickedImage }} />
-              )}
+          <View style={styles.imagePicker}>
+            <View style={styles.imagePreview}>
+              {!pickedImage ? (
+                <Button icon="camera" onPress={takeImageHandler}>
+                  Press to choose image
+             </Button>
+              ) : (
+                  <Image style={styles.image} source={{ uri: pickedImage }} />
+                )}
+            </View>
+            {/* <View style={styles.buttonContainer}>
+              <TouchableOpacity onPress={takeImageHandler} style={styles.appButtonContainer}>
+                <Text style={styles.appButtonText}>Take Image</Text>
+              </TouchableOpacity>
+            </View> */}
           </View>
-          <Button
-            title="Take Image"
-            color={Colors.primary}
-            onPress={takeImageHandler}
+          <Input
+            id="complaint_desc"
+            label="Complaint Description"
+            initialValue="hello"
+            keyboardType="default"
+            required
+            email
+            autoCapitalize="none"
+            errorMessage="Please enter a valid value."
+            onInputChange={inputChangeHandler}
+
+
           />
-        </View>
-        <Input
-          id="complaint_desc"
-          label="Complaint Description"
-          initialValue="hello"
-          keyboardType="default"
-          required
-          email
-          autoCapitalize="none"
-          errorMessage="Please enter a valid value."
-          onInputChange={inputChangeHandler}
 
-
-        />
-
-
-        <Text h1>{latitude ? '' + latitude : "Get Location first"}</Text>
-        <Text h1>{longitude ? '' + longitude : "Get Location first"}</Text>
-
-
-        <View style={styles.buttonContainer}>
-          <Button title="Get Longitude/Latitude"
-            color={Colors.primary}
+          <View style={styles.locationBox}>
+            <View style={styles.subIconBox}>
+              <Button icon="map-marker" ></Button>
+            </View>
+            <View style={styles.subTextBox}>
+              <Text>{latitude ? '' + latitude : "Get Location first"}</Text>
+              <Text>{longitude ? '' + longitude : "Get Location first"}</Text>
+            </View>
+          </View>
+          {/* <MapPreview
+            style={styles.mapPreview}
+            location={pickedLocation}
             onPress={
               () =>
                 props.navigation.navigate('Map', { initialLocation: pickedLocation, onLocationHandler: locationPickedHandler })
 
               //   props.navigation.navigate('Location', { onLocationPicked: locationPickedHandler, pickedLocation: pickedLocation })
             }
+          /> */}
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity onPress={
+              () =>
+                props.navigation.navigate('Map', { initialLocation: pickedLocation, onLocationHandler: locationPickedHandler })
+
+              //   props.navigation.navigate('Location', { onLocationPicked: locationPickedHandler, pickedLocation: pickedLocation })
+            } style={styles.appButtonContainer}>
+              <Text style={styles.appButtonText}>Get Longitude/Latitude</Text>
+            </TouchableOpacity>
+
+          </View>
+          <Input
+            id="type"
+            label="Complaint Type"
+            keyboardType="default"
+            required
+            email
+            autoCapitalize="none"
+            errorMessage="Please enter a valid value."
+            onInputChange={inputChangeHandler}
+            initialValue=""
+
           />
-        </View>
-        <Input
-          id="type"
-          label="Complaint Type"
-          keyboardType="default"
-          required
-          email
-          autoCapitalize="none"
-          errorMessage="Please enter a valid value."
-          onInputChange={inputChangeHandler}
-          initialValue=""
 
-        />
+          <View style={styles.buttonContainer}>
 
-        <View style={styles.buttonContainer}>
-
-          <Button title="Login"
-            color={Colors.primary}
-            onPress={authHandler} />
-        </View>
-
-      </ScrollView>
+            <TouchableOpacity onPress={authHandler} style={styles.appButtonContainer}>
+              <Text style={styles.appButtonText}>Submit</Text>
+            </TouchableOpacity>
+          </View>
 
 
+
+        </ScrollView>
+
+      </View>
 
 
 
@@ -262,16 +286,14 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   authContainer: {
-    width: '80%',
-    maxWidth: 400,
-    maxHeight: 400,
+    width: '100%',
     padding: 20
   },
   buttonContainer: {
     marginTop: 10
   },
   imagePicker: {
-    alignItems: 'center',
+
     marginBottom: 15
   },
   imagePreview: {
@@ -286,7 +308,43 @@ const styles = StyleSheet.create({
   image: {
     width: '100%',
     height: '100%'
-  }
+  },
+  appButtonContainer: {
+    elevation: 8,
+    backgroundColor: Colors.primary,
+    borderRadius: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 12
+  },
+  appButtonText: {
+    fontSize: 15,
+    color: "#fff",
+    alignSelf: "center",
+    textTransform: "uppercase"
+  },
+  mapPreview: {
+    width: '100%',
+    maxWidth: 350,
+    height: 300,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10
+  },
+  locationBox: {
+    flex: 1,
+    padding: 24,
+    flexDirection: 'row'
+  },
+  subIconBox: {
+    flex: 1,
 
+  },
+  subTextBox: {
+    flex: 1
+  },
+  buttonIcon: {
+
+    width: 200,
+    height: 200
+  }
 });
 export default ComplaintDetailScreen;

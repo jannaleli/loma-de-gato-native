@@ -1,41 +1,42 @@
-import React, {useReducer, useEffect} from 'react';
-import {View, Text, TextInput, StyleSheet} from 'react-native';
-
+import React, { useReducer, useEffect } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { TextInput } from 'react-native-paper';
+import Colors from '../../constants/Colors';
 
 const INPUT_CHANGE = 'INPUT_CHANGE';
 const INPUT_BLUR = 'INPUT_BLUR';
 
 const inputReducer = (state, action) => {
-        switch(action.type) {
-            case INPUT_CHANGE: 
+    switch (action.type) {
+        case INPUT_CHANGE:
             return {
                 ...state,
                 value: action.value,
                 isValid: action.isValid
             };
-            case INPUT_BLUR:
-                return {
-                    ...state,
-                    touched: true                
-                }
-            default: 
+        case INPUT_BLUR:
+            return {
+                ...state,
+                touched: true
+            }
+        default:
             return state;
-        }
+    }
 };
 
 const Input = props => {
     const [inputState, dispatch] = useReducer(
         inputReducer, {
-            value: props.initialValue?props.initialValue: '',
+            value: props.initialValue ? props.initialValue : '',
             isValid: props.initiallyValid,
             touched: false
         }
     );
-    const {onInputChange, id} = props;//What does this do though.
+    const { onInputChange, id } = props;//What does this do though.
     //Okay I got it now, we're placing the props property in the following variables
 
     useEffect(() => {
-        if(inputState.touched) {
+        if (inputState.touched) {
             onInputChange(id, inputState.value, inputState.isValid)
         }
     }, [inputState, onInputChange, id]
@@ -45,44 +46,46 @@ const Input = props => {
     const textChangeHandler = text => {
         const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         let isValid = true;
-        
-        if(props.required && text.trim().length ===0) {
+
+        if (props.required && text.trim().length === 0) {
             isValid = false;
         }
 
-        if(props.email && !emailRegex.test(text.toLowerCase())){
+        if (props.email && !emailRegex.test(text.toLowerCase())) {
             isValid = false;
         }
 
-        if(props.min != null && +text < props.min){
+        if (props.min != null && +text < props.min) {
             isValid = false
         }
 
-        if(props.max != null && +text > props.max) {
-            isValid = false;
-        }
-        
-        if(props.minLenght != null && text.length < props.minLength) {
+        if (props.max != null && +text > props.max) {
             isValid = false;
         }
 
-        dispatch({type: INPUT_CHANGE, value: text, isValid: isValid});
+        if (props.minLenght != null && text.length < props.minLength) {
+            isValid = false;
+        }
+
+        dispatch({ type: INPUT_CHANGE, value: text, isValid: isValid });
     };
 
     const lostFocusHandler = () => {
-        dispatch({type: INPUT_BLUR})
+        dispatch({ type: INPUT_BLUR })
     }
 
     return (
         <View style={styles.formControl}>
-            <Text style={styles.label}>{props.label}</Text>
-            <TextInput 
-            {...props}
-            style={styles.input}
-            value={inputState.value}
-            onChangeText={textChangeHandler}
-            onBlur={lostFocusHandler}
-            
+
+            <TextInput
+                {...props}
+                mode='outlined'
+                style={styles.input}
+                value={inputState.value}
+                onChangeText={textChangeHandler}
+                onBlur={lostFocusHandler}
+                outlineColor={Colors.primary}
+
             />
             {!inputState.isValid && inputState.touched && (
                 <View style={styles.errorContainer}>
@@ -111,7 +114,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1
     },
     errorContainer: {
-        marginVertical : 5
+        marginVertical: 5
     },
     errorText: {
         fontFamily: 'open-sans',

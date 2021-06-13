@@ -14,7 +14,7 @@ import BarangayClearanceScreen from './screens/BarangayClearanceScreen';
 import BusinessPermitScreen from './screens/BusinessPermitScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-
+import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 
 import { Ionicons } from '@expo/vector-icons';
 import Colors from './constants/Colors';
@@ -22,7 +22,6 @@ import LoginScreen from './screens/LoginScreen';
 import HomeScreen from './screens/HomeScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import { createDrawerNavigator } from 'react-navigation-drawer';
-
 
 
 
@@ -48,7 +47,14 @@ const fetchFonts = () => {
 
 export default function App() {
   const [fontLoaded, setFontLoaded] = useState(false);
-
+  const theme = {
+    ...DefaultTheme,
+    colors: {
+      ...DefaultTheme.colors,
+      primary: Colors.primary,
+      accent: Colors.accent,
+    },
+  };
   if (!fontLoaded) {
     return (
       <AppLoading
@@ -61,11 +67,13 @@ export default function App() {
 
 
   return (
+
     <Provider store={store}>
+      <PaperProvider theme={theme}>
+        <BarangayNavigationContainer />
 
-      <BarangayNavigationContainer />
+      </PaperProvider>
+    </Provider >
 
-
-    </Provider>
   );
 }
