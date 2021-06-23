@@ -22,10 +22,9 @@ const MapScreen = props => {
     //This one should obviously be in Marilao, Bulacan.
     //props.route.params.initialLocation;//
     let markerCoordinates;
-    let stringNow = "hello Mam";
+
     const [selectedLocation, setSelectedLocation] = useState(initialPickedLocation);
-    console.log("refrsh");
-    console.log(selectedLocation);
+
 
     //Where do we get this data tho
     //Research for it or watch udemy video again 

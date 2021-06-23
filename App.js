@@ -5,9 +5,10 @@ import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import { enableScreens } from 'react-native-screens';
 import ReduxThunk from 'redux-thunk';
-import Amplify from 'aws-amplify';
+import Amplify, { API } from 'aws-amplify';
 import awsExports from './src/aws-exports';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import eventReducer from './store/reducers/events';
 import authReducer from './store/reducers/auth';
 import BarangayNavigationContainer from './navigation/BarangayController'
 import BarangayClearanceScreen from './screens/BarangayClearanceScreen';
@@ -29,11 +30,66 @@ import ComplaintDetailScreen from './screens/ComplaintDetailScreen';
 
 const rootReducer = combineReducers({
 
-  auth: authReducer
+  auth: authReducer,
+  events: eventReducer
 });
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
-Amplify.configure(awsExports);
+Amplify.configure({
+  // OPTIONAL - if your API requires authentication 
+  Auth: {
+    // REQUIRED - Amazon Cognito Identity Pool ID
+    identityPoolId: 'ap-southeast-1:d31cf569-2c5b-42da-b021-185fe95ecc44',
+    // REQUIRED - Amazon Cognito Region
+    region: 'ap-southeast-1',
+    // OPTIONAL - Amazon Cognito User Pool ID
+    userPoolId: 'ap-southeast-1_lvUalkT6e',
+    // OPTIONAL - Amazon Cognito Web Client ID (26-char alphanumeric string)
+    userPoolWebClientId: '3rb0qsnbdgqr5p5v1vsfvc6md',
+  },
+  API: {
+    endpoints: [
+      {
+        name: "BarangayAPI",
+        endpoint: "https://mjdjlvb5x9.execute-api.ap-southeast-1.amazonaws.com/prod"
+      }
+    ]
+  },
+  Storage: {
+    AWSS3: {
+      bucket: 'barangay-api', //REQUIRED -  Amazon S3 bucket
+      region: 'ap-southeast-1', //OPTIONAL -  Amazon service region
+    }
+  }
+});
+
+API.configure({
+  // OPTIONAL - if your API requires authentication 
+  Auth: {
+    // REQUIRED - Amazon Cognito Identity Pool ID
+    identityPoolId: 'ap-southeast-1:d31cf569-2c5b-42da-b021-185fe95ecc44',
+    // REQUIRED - Amazon Cognito Region
+    region: 'ap-southeast-1',
+    // OPTIONAL - Amazon Cognito User Pool ID
+    userPoolId: 'ap-southeast-1_lvUalkT6e',
+    // OPTIONAL - Amazon Cognito Web Client ID (26-char alphanumeric string)
+    userPoolWebClientId: '3rb0qsnbdgqr5p5v1vsfvc6md',
+  },
+  API: {
+    endpoints: [
+      {
+        name: "BarangayAPI",
+        endpoint: "https://mjdjlvb5x9.execute-api.ap-southeast-1.amazonaws.com/prod"
+      }
+    ]
+  },
+  Storage: {
+    AWSS3: {
+      bucket: 'barangay-api', //REQUIRED -  Amazon S3 bucket
+      region: 'ap-southeast-1', //OPTIONAL -  Amazon service region
+    }
+  }
+})
 
 
 //enableScreens();

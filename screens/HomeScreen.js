@@ -7,7 +7,9 @@ import {
   Button,
   ActivityIndicator,
   Alert,
-  Image
+  Image,
+  TouchableOpacity,
+  Text
 } from 'react-native';
 
 import { LinearGradient } from 'expo-linear-gradient';
@@ -26,67 +28,72 @@ import Card from '../components/UI/Card';
 const HomeScreen = props => {
 
 
-//   const registerHandler = useCallback(
-//     (inputIdentifier, inputValue, inputValidity) => {
-//         dispatchFormState(
-//             {
-//                 type: FORM_INPUT_UPDATE,
-//                 value: inputValue,
-//                 isValid: inputValidity,
-//                 input: inputIdentifier
-//             }
-//         );
-//     }, [dispatchFormState]
-// );
+  //   const registerHandler = useCallback(
+  //     (inputIdentifier, inputValue, inputValidity) => {
+  //         dispatchFormState(
+  //             {
+  //                 type: FORM_INPUT_UPDATE,
+  //                 value: inputValue,
+  //                 isValid: inputValidity,
+  //                 input: inputIdentifier
+  //             }
+  //         );
+  //     }, [dispatchFormState]
+  // );
 
 
 
   return (
-    <KeyboardAvoidingView 
-    behavior="padding"
-    keyboardVerticalOffset={50}
-    style={styles.screen}>
-   <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']}
-            style={styles.gradient}> 
-    <Card style={styles.homeContainer} >
-      
-             <ScrollView  >
- 
-                          <Image source={require('../assets/barangay.jpg')}
-                          style={{width: 200, height: 200}} />
-                          <View style={styles.buttonContainer}>
-                        <Button title="Register"
-                        color={Colors.primary}
-                        onPress={() => 
-                         props.navigation.navigate('Register')
-                        
-                       
-                        } />   
-                        </View>
-                        <View style={styles.buttonContainer}>
-                        <Button title="Login"
-                        color={Colors.primary}
-                        onPress={ () => 
-                          props.navigation.navigate('Login')
-                        
-                        } />  
-                        </View>
-                        <View style={styles.buttonContainer}>
-                        <Button title="Tutorial"
-                        color={Colors.primary}
-                        
-                        onPress={() => 
-                          props.navigation.navigate('Clearance')
-                          } />  
-                        </View>  
-              </ScrollView>  
-       
+    <KeyboardAvoidingView
+      behavior="padding"
+      keyboardVerticalOffset={50}
+      style={styles.screen}>
+      <LinearGradient colors={['#a8baab', '#ebedd0', '#fdfefd']}
+        style={styles.gradient}>
+        <View style={styles.homeContainer} >
 
-     </Card>
-     </LinearGradient>
-  
+          <ScrollView  >
+
+            <Image source={require('../assets/barangay.png')}
+              style={{ width: 200, height: 200, alignSelf: 'center' }} />
+            <View style={styles.buttonContainer}>
+
+
+              <TouchableOpacity onPress={() =>
+                props.navigation.navigate('Register')
+
+
+              } style={styles.appButtonContainer}>
+                <Text style={styles.appButtonText}>Register</Text>
+              </TouchableOpacity>
+
+            </View>
+            <View style={styles.buttonContainer}>
+
+
+              <TouchableOpacity onPress={() =>
+                props.navigation.navigate('Login')
+
+              } style={styles.appButtonContainer}>
+                <Text style={styles.appButtonText}>Login</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.buttonContainer}>
+
+              <TouchableOpacity onPress={() =>
+                props.navigation.navigate('Clearance')
+              } style={styles.appButtonContainer}>
+                <Text style={styles.appButtonText}>Tutorial</Text>
+              </TouchableOpacity>
+            </View>
+          </ScrollView>
+
+
+        </View>
+      </LinearGradient>
+
     </KeyboardAvoidingView>
-  ); 
+  );
 };
 const styles = StyleSheet.create({
   screen: {
@@ -105,6 +112,19 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     marginTop: 10
+  },
+  appButtonContainer: {
+    elevation: 8,
+    backgroundColor: Colors.primary,
+    borderRadius: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 12
+  },
+  appButtonText: {
+    fontSize: 15,
+    color: "#fff",
+    alignSelf: "center",
+    textTransform: "uppercase"
   }
 });
 export default HomeScreen;

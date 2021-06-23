@@ -51,7 +51,7 @@ const formReducer = (state, action) => {
 
 
 const ComplaintDetailScreen = props => {
-  const pickedLocation = props.route.params.pickedLocation;
+  const pickedLocation = props.route.params.pickedLocation ? props.route.params.pickedLocation : { lat: 14.7731, lng: 121.0183 };
 
 
 
@@ -173,55 +173,52 @@ const ComplaintDetailScreen = props => {
   );
 
   return (
-    <KeyboardAvoidingView
-      behavior="padding"
-      keyboardVerticalOffset={50}
-      style={styles.screen}>
 
 
-      <View style={styles.authContainer}>
-        <ScrollView>
 
-          <View style={styles.imagePicker}>
-            <View style={styles.imagePreview}>
-              {!pickedImage ? (
-                <Button icon="camera" onPress={takeImageHandler}>
-                  Press to choose image
+    <View style={styles.authContainer}>
+      <ScrollView>
+
+        <View style={styles.imagePicker}>
+          <View style={styles.imagePreview}>
+            {!pickedImage ? (
+              <Button icon="camera" onPress={takeImageHandler}>
+                Press to choose image
              </Button>
-              ) : (
-                  <Image style={styles.image} source={{ uri: pickedImage }} />
-                )}
-            </View>
-            {/* <View style={styles.buttonContainer}>
+            ) : (
+                <Image style={styles.image} source={{ uri: pickedImage }} />
+              )}
+          </View>
+          {/* <View style={styles.buttonContainer}>
               <TouchableOpacity onPress={takeImageHandler} style={styles.appButtonContainer}>
                 <Text style={styles.appButtonText}>Take Image</Text>
               </TouchableOpacity>
             </View> */}
+        </View>
+        <Input
+          id="complaint_desc"
+          label="Complaint Description"
+          initialValue="hello"
+          keyboardType="default"
+          required
+          email
+          autoCapitalize="none"
+          errorMessage="Please enter a valid value."
+          onInputChange={inputChangeHandler}
+
+
+        />
+
+        <View style={styles.locationBox}>
+          <View style={styles.subIconBox}>
+            <Button icon="map-marker" ></Button>
           </View>
-          <Input
-            id="complaint_desc"
-            label="Complaint Description"
-            initialValue="hello"
-            keyboardType="default"
-            required
-            email
-            autoCapitalize="none"
-            errorMessage="Please enter a valid value."
-            onInputChange={inputChangeHandler}
-
-
-          />
-
-          <View style={styles.locationBox}>
-            <View style={styles.subIconBox}>
-              <Button icon="map-marker" ></Button>
-            </View>
-            <View style={styles.subTextBox}>
-              <Text>{latitude ? '' + latitude : "Get Location first"}</Text>
-              <Text>{longitude ? '' + longitude : "Get Location first"}</Text>
-            </View>
+          <View style={styles.subTextBox}>
+            <Text>{latitude ? '' + latitude : "Get Location first"}</Text>
+            <Text>{longitude ? '' + longitude : "Get Location first"}</Text>
           </View>
-          {/* <MapPreview
+        </View>
+        {/* <MapPreview
             style={styles.mapPreview}
             location={pickedLocation}
             onPress={
@@ -231,48 +228,48 @@ const ComplaintDetailScreen = props => {
               //   props.navigation.navigate('Location', { onLocationPicked: locationPickedHandler, pickedLocation: pickedLocation })
             }
           /> */}
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity onPress={
-              () =>
-                props.navigation.navigate('Map', { initialLocation: pickedLocation, onLocationHandler: locationPickedHandler })
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity onPress={
+            () =>
+              props.navigation.navigate('Map', { initialLocation: pickedLocation, onLocationHandler: locationPickedHandler })
 
-              //   props.navigation.navigate('Location', { onLocationPicked: locationPickedHandler, pickedLocation: pickedLocation })
-            } style={styles.appButtonContainer}>
-              <Text style={styles.appButtonText}>Get Longitude/Latitude</Text>
-            </TouchableOpacity>
+            //   props.navigation.navigate('Location', { onLocationPicked: locationPickedHandler, pickedLocation: pickedLocation })
+          } style={styles.appButtonContainer}>
+            <Text style={styles.appButtonText}>Get Longitude/Latitude</Text>
+          </TouchableOpacity>
 
-          </View>
-          <Input
-            id="type"
-            label="Complaint Type"
-            keyboardType="default"
-            required
-            email
-            autoCapitalize="none"
-            errorMessage="Please enter a valid value."
-            onInputChange={inputChangeHandler}
-            initialValue=""
+        </View>
+        <Input
+          id="type"
+          label="Complaint Type"
+          keyboardType="default"
+          required
+          email
+          autoCapitalize="none"
+          errorMessage="Please enter a valid value."
+          onInputChange={inputChangeHandler}
+          initialValue=""
 
-          />
+        />
 
-          <View style={styles.buttonContainer}>
+        <View style={styles.buttonContainer}>
 
-            <TouchableOpacity onPress={authHandler} style={styles.appButtonContainer}>
-              <Text style={styles.appButtonText}>Submit</Text>
-            </TouchableOpacity>
-          </View>
-
-
-
-        </ScrollView>
-
-      </View>
+          <TouchableOpacity onPress={authHandler} style={styles.appButtonContainer}>
+            <Text style={styles.appButtonText}>Submit</Text>
+          </TouchableOpacity>
+        </View>
 
 
 
+      </ScrollView>
+
+    </View>
 
 
-    </KeyboardAvoidingView>
+
+
+
+
   );
 };
 

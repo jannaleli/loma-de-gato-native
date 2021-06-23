@@ -16,13 +16,14 @@ import Card from '../components/UI/Card';
 
 const DocumentScreen = props => {
     return (
+
         <KeyboardAvoidingView
             behavior="padding"
             keyboardVerticalOffset={50}
             style={styles.screen}>
-
             <LinearGradient colors={['#a8baab', '#ebedd0', '#fdfefd']}
                 style={styles.gradient}>
+
 
                 <Card style={styles.homeContainer}>
 
@@ -55,7 +56,7 @@ const DocumentScreen = props => {
                                 <Text style={styles.appButtonText}>Check Status</Text>
                             </TouchableOpacity>
                         </View>
-                        <View style={styles.buttonContainer}>
+                        {/* <View style={styles.buttonContainer}>
                             <TouchableOpacity onPress={
                                 () =>
                                     props.navigation.navigate('Complaint', { pickedLocation: { lat: 14.7731, lng: 121.0183 } })
@@ -63,10 +64,9 @@ const DocumentScreen = props => {
                                 <Text style={styles.appButtonText}>Post Complaint temp</Text>
                             </TouchableOpacity>
 
-                        </View>
+                        </View> */}
                     </ScrollView>
                 </Card>
-
 
 
 
@@ -74,6 +74,8 @@ const DocumentScreen = props => {
 
 
         </KeyboardAvoidingView>
+
+
     );
 };
 
